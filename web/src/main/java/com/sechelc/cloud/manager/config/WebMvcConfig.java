@@ -6,7 +6,11 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.protobuf.ProtobufHttpMessageConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.validation.Validator;
@@ -23,8 +27,11 @@ import org.thymeleaf.templateresolver.TemplateResolver;
 
 import com.sechelc.cloud.manager.Application;
 
+import java.util.List;
+
 @Configuration
 @ComponentScan(basePackageClasses = Application.class, includeFilters = @Filter(Controller.class), useDefaultFilters = false)
+@Import(RestConfiguration.class)
 class WebMvcConfig extends WebMvcConfigurationSupport {
 
     private static final String MESSAGE_SOURCE = "/WEB-INF/i18n/messages";
@@ -47,6 +54,14 @@ class WebMvcConfig extends WebMvcConfigurationSupport {
         messageSource.setBasename(MESSAGE_SOURCE);
         messageSource.setCacheSeconds(5);
         return messageSource;
+    }
+
+    @Override
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        ProtobufHttpMessageConverter protobufHttpMessageConverter = new ProtobufHttpMessageConverter();
+        converters.add(protobufHttpMessageConverter);
+
+        super.configureMessageConverters(converters);
     }
 
     @Bean

@@ -24,7 +24,6 @@ import com.sechelc.cloud.manager.Application;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackageClasses = Application.class)
-@Import(RepositoryRestMvcConfiguration.class)
 class JpaConfig implements TransactionManagementConfigurer {
 
     @Value("${dataSource.driverClassName}")
