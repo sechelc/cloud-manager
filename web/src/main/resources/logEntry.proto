@@ -1,0 +1,39 @@
+package com.sechelc.cloud.manager;
+option java_package = "com.sechelc.cloud.manager.model";
+option java_outer_classname = "LogEntryProtocol";
+
+message LogEntry {
+    required string truckNo=1;
+    required string pressure=2;
+    required string speed=3;
+    required string volume=4;
+    required string slump=5;
+    required string viscosity=6;
+    required string yield=7;
+    required string tempReceiver=8;
+    required string tempProbe=9;
+    required int64 timestamp=10;
+    required string status=11;
+    required string measVolume=12;
+    required string calcVolume=13;
+    required string angle=14;
+    required string ratio=15;
+    required string turnNumber=16;
+    required string pairLinkQuality=17;
+    required string turnCountPos=18;
+    required string turnCountNeg=19;
+    required string tempAir=20;
+    required string waterTemperature=21;
+    required string batteryVoltage=22;
+    required string supplyVoltage=23;
+    required string chargerVoltage=24;
+    required string zAxis=25;
+    required string drumState=26;
+    required string truckActivity=27;
+    required string measurementIndex=28;
+    required string logQty=29;
+    required string addedWater=30;
+    required string latitude=31;
+    required string longitude=32;
+    required string company=33;
+}
