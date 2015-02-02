@@ -1,6 +1,12 @@
 .git
-/target
+target/*
+/target/*
+/out
+
 *.iml
 *.idea
 README.txt
-workspace.xml
+/workspace.xml
+*.class
+*.war
+
