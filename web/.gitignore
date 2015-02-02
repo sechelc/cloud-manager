@@ -1,0 +1,12 @@
+.git
+target/*
+/target/*
+/out
+
+*.iml
+*.idea
+README.txt
+/workspace.xml
+*.class
+*.war
+
