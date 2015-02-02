@@ -1,0 +1,6 @@
+.git
+/target
+*.iml
+*.idea
+README.txt
+workspace.xml
