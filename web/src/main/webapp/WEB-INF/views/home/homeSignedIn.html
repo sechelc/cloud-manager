@@ -6,15 +6,18 @@
         <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
         <link href="../../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}" />
         <script src="http://code.jquery.com/jquery-latest.js"></script>
-        <script src="../../../resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
-
+        <script src="../../../resources/js/libs/bootstrap.min.js" th:src="@{/resources/js/libs/bootstrap.min.js}"></script>
         <!--GOOGLE MAPS API-->
         <script type="text/javascript"
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAsVqHtStTbSymM7tKdrdD54-YcehXvkBw">
         </script>
         <!--GOOGLE MAPS API-->
         <!--APP-->
-        <script type="text/javascript" src="../../../resources/js/baseApp.js"></script>
+        <script src="../../../resources/js/libs/underscore.js" th:src="@{/resources/js/libs/underscore.js}"></script>
+        <script src="../../../resources/js/libs/backbone.js" th:src="@{/resources/js/libs/backbone.js}"></script>
+        <script src="../../../resources/js/models/mapPointsModel.js" th:src="@{/resources/js/models/mapPointsModel.js}"></script>
+        <script src="../../../resources/js/views/mapPointsView.js" th:src="@{/resources/js/views/mapPointsView.js}"></script>
+        <script src="../../../resources/js/baseApp.js" th:src="@{/resources/js/baseApp.js}"></script>
         <!--APP-->
     </head>
     <body>
