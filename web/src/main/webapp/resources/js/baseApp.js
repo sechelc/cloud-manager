@@ -11,9 +11,18 @@ function initialize() {
 jQuery(document).ready(function ($) {
     app.map = initialize();
     app.mapPointsCol = new app.mapPoints;
-    app.mapPointsViewRef = new app.mapPointsView({
-        collection: app.mapPointsCol
+    google.maps.event.addListener(app.map, 'click', function (e) {
+        //render another view pop from bottom iooooiii
+        if (app.truckInfoViewRef) {
+            app.truckInfoViewRef.remove(app.truckInfoViewRef);
+        }
     });
-    app.mapPointsViewRef.map = app.map;
+    app.tpl.loadTemplates(['truckInfo'], function () {
+        app.mapPointsViewRef = new app.mapPointsView({
+            collection: app.mapPointsCol
+        });
+        app.mapPointsViewRef.map = app.map;
+    });
     app.mapPointsCol.fetch();
+
 });

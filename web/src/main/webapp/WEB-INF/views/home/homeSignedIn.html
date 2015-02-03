@@ -15,15 +15,13 @@
         <!--APP-->
         <script src="../../../resources/js/libs/underscore.js" th:src="@{/resources/js/libs/underscore.js}"></script>
         <script src="../../../resources/js/libs/backbone.js" th:src="@{/resources/js/libs/backbone.js}"></script>
+        <script src="../../../resources/js/utils.js" th:src="@{/resources/js/utils.js}"></script>
         <script src="../../../resources/js/models/mapPointsModel.js" th:src="@{/resources/js/models/mapPointsModel.js}"></script>
         <script src="../../../resources/js/views/mapPointsView.js" th:src="@{/resources/js/views/mapPointsView.js}"></script>
         <script src="../../../resources/js/baseApp.js" th:src="@{/resources/js/baseApp.js}"></script>
         <!--APP-->
     </head>
     <body>
-        <script type="text/html" id="truckInfo_template">
-            <span>stuff</span>
-        </script>
         <div th:replace="fragments/header :: header">&nbsp;</div>
         <div id="bigMap"></div>
         <div id="truckInfo"></div>
