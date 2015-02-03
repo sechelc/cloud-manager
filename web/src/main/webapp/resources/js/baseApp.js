@@ -24,5 +24,17 @@ jQuery(document).ready(function ($) {
         app.mapPointsViewRef.map = app.map;
     });
     app.mapPointsCol.fetch();
-
+    timeout();
 });
+
+function timeout() {
+    //animate this map!
+    setTimeout(function () {
+        var model = app.mapPointsCol.models[ Math.floor(Math.random() * app.mapPointsCol.length)];
+        var newLat = model.get('latitude') + Math.random() / 100 - Math.random() / 100;
+        var newLng = model.get('longitude') + Math.random() / 100 - Math.random() / 100;
+        model.set('latitude', newLat);
+        model.set('longitude', newLng);
+        timeout();
+    }, 1000);
+}

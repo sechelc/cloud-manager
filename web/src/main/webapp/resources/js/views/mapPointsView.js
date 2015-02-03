@@ -42,24 +42,35 @@ $(function () {
             var self = this;
             _.each(self.collection.models, function (model, index) {
                 var marker = model.get('marker');
-                marker.setMap(self.map);
-                var popup = new google.maps.InfoWindow({
-                    content: self.template({model: model})
-                });
-                google.maps.event.addListener(marker, 'mouseover', function (e) {
-                    popup.open(self.map, marker);
-                });
-                google.maps.event.addListener(marker, 'mouseout', function (e) {
-                    popup.close();
-                });
-                google.maps.event.addListener(marker, 'click', function (e) {
-                    e.cancelBubble = true;
-                    //render another view pop from bottom iooooiii
-                    app.truckInfoViewRef = new app.truckInfoView({
-                        model: model
+                if (!model.get('drawn')) {
+                    //draw new marker, attach events
+                    marker.setMap(self.map);
+                    model.set('drawn', true);
+                    var popup = new google.maps.InfoWindow({
+                        content: self.template({model: model})
                     });
-                    app.truckInfoViewRef.render();
-                });
+                    google.maps.event.addListener(marker, 'mouseover', function (e) {
+                        popup.open(self.map, marker);
+                    });
+                    google.maps.event.addListener(marker, 'mouseout', function (e) {
+                        popup.close();
+                    });
+                    google.maps.event.addListener(marker, 'click', function (e) {
+                        e.cancelBubble = true;
+                        //render another view pop from bottom iooooiii
+                        if (app.truckInfoViewRef) {
+                            app.truckInfoViewRef.model = model;
+                        } else {
+                            app.truckInfoViewRef = new app.truckInfoView({
+                                model: model
+                            });
+                        }
+                        app.truckInfoViewRef.render();
+                    });
+                } else {
+                    //update position
+                    marker.setPosition( new google.maps.LatLng( model.get('latitude'),model.get('longitude') ) );
+                }
             });
             return this;
         }
