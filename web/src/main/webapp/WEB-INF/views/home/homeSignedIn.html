@@ -21,8 +21,12 @@
         <!--APP-->
     </head>
     <body>
+        <script type="text/html" id="truckInfo_template">
+            <span>stuff</span>
+        </script>
         <div th:replace="fragments/header :: header">&nbsp;</div>
         <div id="bigMap"></div>
+        <div id="truckInfo"></div>
         <div th:replace="fragments/footer :: footer">&nbsp;</div>
     </body>
 </html>

@@ -6,6 +6,10 @@ app.mapPointModel = Backbone.Model.extend({
         marker: {}
     },
     parse: function (data) {
+        data.marker = new google.maps.Marker({
+            position: new google.maps.LatLng(parseInt(data.latitude, 10) + Math.random(0.05, 0.5), parseInt(data.longitude, 10) + Math.random(0.05, 0.5)),
+            title: "Truck ID:" + data.truckNo
+        });
         return data;
     }
 });

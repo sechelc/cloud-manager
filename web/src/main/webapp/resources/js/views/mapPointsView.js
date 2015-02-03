@@ -1,5 +1,11 @@
 var app = app || {};
 
+
+app.truckInfoView = Backbone.View.extend({
+//    template : _.template($('#truckInfo_template').html()),
+//    el: '#truckInfo'
+});
+
 app.mapPointsView = Backbone.View.extend({
     template: _.template('<li><b>Name: </b>TruckNo <%=model.get("truckNo")%></li><li><b>Last Updated: </b><%=model.get("timestamp")%></li>'),
     tagName: 'ul',
@@ -16,12 +22,8 @@ app.mapPointsView = Backbone.View.extend({
     render: function () {
         var self = this;
         _.each(self.collection.models, function (model, index) {
-            var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(parseInt(model.get('latitude'), 10) + Math.random(0.05, 0.5), parseInt(model.get('longitude'), 10) + Math.random(0.05, 0.5)),
-                title: "Truck ID:" + model.get('truckNo'),
-                map: self.map
-            });
-            model.set('marker', marker);
+            var marker = model.get('marker');
+            marker.setMap(self.map);
             var popup = new google.maps.InfoWindow({
                 content: self.template({model: model})
             });
@@ -30,6 +32,9 @@ app.mapPointsView = Backbone.View.extend({
             });
             google.maps.event.addListener(marker, 'mouseout', function (e) {
                 popup.close();
+            });
+            google.maps.event.addListener(marker, 'click', function (e) {
+                //render another view pop from bottom iooooiii
             });
         });
         return this;
