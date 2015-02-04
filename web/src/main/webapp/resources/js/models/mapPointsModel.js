@@ -24,7 +24,7 @@ app.mapPointModel = Backbone.Model.extend({
 
 app.mapPoints = Backbone.Collection.extend({
     model: app.mapPointModel,
-    url: "log",
+    url: "log/search/findLatestByCompany?company=test",
     parse: function (data) {
         return data._embedded.log;
     }
