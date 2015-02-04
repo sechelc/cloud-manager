@@ -24,6 +24,23 @@ public class LogEntryService {
             logEntry.setTimestamp(i * 100);
             logsRepository.save(logEntry);
         }
+
+        for (int i = 0; i <= 360; i++) {
+            LogEntry logEntry = getLogEntry("100");
+            logEntry.setTempProbe(String.valueOf(Math.sin(i + 0.0d)));
+            logEntry.setPressure(String.valueOf(Math.asin(i + 0.0d)));
+            logEntry.setSlump(String.valueOf(Math.cos(i + 0.0d)));
+            logEntry.setSpeed(String.valueOf(i));
+            if(i<100) {
+                logEntry.setVolume(String.valueOf(i));
+            } else if (i<300){
+                logEntry.setVolume("100");
+            } else{
+                logEntry.setVolume(String.valueOf(100 - (300 - i )));
+            }
+            logEntry.setTimestamp(i * 100);
+            logsRepository.save(logEntry);
+        }
     }
 
     private LogEntry getLogEntry(String x) {
