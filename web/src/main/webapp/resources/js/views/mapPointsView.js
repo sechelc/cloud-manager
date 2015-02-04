@@ -5,7 +5,7 @@ $(function () {
     app.truckInfoView = Backbone.View.extend({
         el: '#truckInfo',
         initialize: function () {
-            this.listenTo(this.model, 'change', this.render);
+            this.listenTo(this.model, 'change sync', this.render);
             this.template = _.template(app.tpl.get('truckInfo'));
         },
         render: function () {
@@ -71,7 +71,9 @@ $(function () {
                     //update position
                     marker.setPosition( new google.maps.LatLng( model.get('latitude'),model.get('longitude') ) );
                 }
+                app.latlngbounds.extend(marker.getPosition());
             });
+            self.map.fitBounds(app.latlngbounds);
             return this;
         }
     });

@@ -2,6 +2,11 @@ var app = app || {};
 
 app.mapPointModel = Backbone.Model.extend({
     //parse lat log to map objects
+    idAttribute : "truckNo",
+    url: function () {
+        var _links = this.get('_links');
+        return   _links.self.href;
+    },
     defaults: {
         marker: {},
         drawn: false

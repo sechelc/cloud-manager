@@ -10,26 +10,23 @@ import javax.annotation.PostConstruct;
  */
 @Service
 public class LogEntryService {
+
     @Autowired
     private LogsRepository logsRepository;
 
     @PostConstruct
-    public void initialize(){
-        LogEntry logEntry = getLogEntry();
-        LogEntry logEntry1 = getLogEntry();
-        logEntry1.setTimestamp(1000);
-        LogEntry logEntry2 = getLogEntry();
-        logEntry2.setTruckNo("2");
-        LogEntry logEntry3 = getLogEntry();
-        logEntry3.setTruckNo("2");
-        logEntry3.setTimestamp(2000);
-        logsRepository.save(logEntry);
-        logsRepository.save(logEntry1);
-        logsRepository.save(logEntry2);
-        logsRepository.save(logEntry3);
+    public void initialize() {
+        for (int i = 0; i <= 30; i++) {
+            LogEntry logEntry = getLogEntry(String.valueOf(i));
+            if (i % 2 == 0) {
+                logEntry.setCompany("altacompanie");
+            }
+            logEntry.setTimestamp(i * 100);
+            logsRepository.save(logEntry);
+        }
     }
 
-    private LogEntry getLogEntry() {
+    private LogEntry getLogEntry(String x) {
         LogEntry logEntry = new LogEntry();
         logEntry.setAddedWater("12");
         logEntry.setAngle("12");
@@ -55,7 +52,7 @@ public class LogEntryService {
         logEntry.setTempReceiver("30");
         logEntry.setTimestamp(200);
         logEntry.setTruckActivity("10");
-        logEntry.setTruckNo("1");
+        logEntry.setTruckNo(x);
         logEntry.setTurnCountNeg("10");
         logEntry.setTurnCountPos("10");
         logEntry.setTurnNumber("10");

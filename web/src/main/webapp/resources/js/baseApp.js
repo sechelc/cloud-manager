@@ -1,8 +1,8 @@
 var app = app || {};
 function initialize() {
     var mapOptions = {
-        center: {lat: 46.771630, lng: 23.591965},
-        zoom: 8
+        center: {lat: 0, lng: 0},
+        zoom: 0
     };
     var map = new google.maps.Map(document.getElementById('bigMap'),
             mapOptions);
@@ -10,6 +10,7 @@ function initialize() {
 }
 jQuery(document).ready(function ($) {
     app.map = initialize();
+    app.latlngbounds = new google.maps.LatLngBounds();
     app.mapPointsCol = new app.mapPoints;
     google.maps.event.addListener(app.map, 'click', function (e) {
         //render another view pop from bottom iooooiii
@@ -24,17 +25,18 @@ jQuery(document).ready(function ($) {
         app.mapPointsViewRef.map = app.map;
     });
     app.mapPointsCol.fetch();
-    timeout();
+//    timeout();
 });
 
 function timeout() {
     //animate this map!
     setTimeout(function () {
         var model = app.mapPointsCol.models[ Math.floor(Math.random() * app.mapPointsCol.length)];
-        var newLat = model.get('latitude') + Math.random() / 100 - Math.random() / 100;
-        var newLng = model.get('longitude') + Math.random() / 100 - Math.random() / 100;
+        var newLat = model.get('latitude') + Math.random() / 10 - Math.random() / 10;
+        var newLng = model.get('longitude') + Math.random() / 10 - Math.random() / 10;
         model.set('latitude', newLat);
         model.set('longitude', newLng);
+        console.info('moved: ',model.cid)
         timeout();
-    }, 1000);
+    }, 2000);
 }
