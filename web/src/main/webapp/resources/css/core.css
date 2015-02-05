@@ -26,6 +26,7 @@ body { height: 100%; padding: 50px 0 0 0;}
     height: 0;
     background: rgba(0,0,0,0.8);
     color: whitesmoke;
+    overflow: auto;
 }
 .truckInfoInner{
     margin: 20px;
@@ -37,5 +38,8 @@ body { height: 100%; padding: 50px 0 0 0;}
 .truckInfoInner ul li{
     display: inline-table;
     width: 24%;
+}
+#truckRecentInfoChart{
+    margin: 10px 0 0 0;
 }
 

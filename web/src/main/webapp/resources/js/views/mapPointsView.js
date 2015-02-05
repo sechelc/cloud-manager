@@ -4,6 +4,10 @@ $(function () {
 
     app.truckInfoView = Backbone.View.extend({
         el: '#truckInfo',
+        events: {
+            'click #showChart': 'showChart',
+            'click #hideChart': 'hideChart'
+        },
         initialize: function () {
             this.listenTo(this.model, 'change sync', this.render);
             this.template = _.template(app.tpl.get('truckInfo'));
@@ -20,8 +24,23 @@ $(function () {
                 height: '0'
             }, 300, function () {
                 self.$el.html('');
+                self.$el.find('#chart').empty();
             });
             self.stopListening();
+        },
+        showChart: function (e) {
+            app.drawTruckRecentInfoChart(this.model.get('truckNo'), this.$el.find('#truckRecentInfoChart'));
+            this.$el.animate({
+                height: '65%'
+            }, 200);
+            $(e.currentTarget).addClass('hide').siblings("#hideChart").removeClass('hide');
+        },
+        hideChart: function (e) {
+            this.$el.animate({
+                height: '15%'
+            }, 200);
+            this.$el.find('#truckRecentInfoChart').empty();
+            $(e.currentTarget).addClass('hide').siblings("#showChart").removeClass('hide');
         }
     });
 
@@ -69,7 +88,7 @@ $(function () {
                     });
                 } else {
                     //update position
-                    marker.setPosition( new google.maps.LatLng( model.get('latitude'),model.get('longitude') ) );
+                    marker.setPosition(new google.maps.LatLng(model.get('latitude'), model.get('longitude')));
                 }
                 app.latlngbounds.extend(marker.getPosition());
             });
