@@ -96,4 +96,49 @@ $(function () {
             return this;
         }
     });
+    app.staticPointsView = Backbone.View.extend({
+        template: _.template('<li><b>Name: </b><%=model.get("name")%></li>'),
+        tagName: 'ul',
+        initialize: function () {
+            this.listenTo(this.collection, 'change sync', this.render);
+        },
+        render: function () {
+            var self = this;
+            _.each(self.collection.models, function (model, index) {
+                var marker = model.get('marker');
+                if (!model.get('drawn')) {
+                    //draw new marker, attach events
+                    marker.setMap(self.map);
+                    model.set('drawn', true);
+                    var popup = new google.maps.InfoWindow({
+                        content: self.template({model: model})
+                    });
+                    google.maps.event.addListener(marker, 'mouseover', function (e) {
+                        popup.open(self.map, marker);
+                    });
+                    google.maps.event.addListener(marker, 'mouseout', function (e) {
+                        popup.close();
+                    });
+//                    google.maps.event.addListener(marker, 'click', function (e) {
+//                        e.cancelBubble = true;
+//                        //render another view pop from bottom iooooiii
+//                        if (app.truckInfoViewRef) {
+//                            app.truckInfoViewRef.model = model;
+//                        } else {
+//                            app.truckInfoViewRef = new app.truckInfoView({
+//                                model: model
+//                            });
+//                        }
+//                        app.truckInfoViewRef.render();
+//                    });
+                } else {
+                    //update position
+                    marker.setPosition(new google.maps.LatLng(model.get('latitude'), model.get('longitude')));
+                }
+                app.latlngbounds.extend(marker.getPosition());
+            });
+            self.map.fitBounds(app.latlngbounds);
+            return this;
+        }
+    });
 });
