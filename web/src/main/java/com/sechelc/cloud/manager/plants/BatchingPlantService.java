@@ -25,7 +25,7 @@ public class BatchingPlantService {
     private BatchingPlant BatchingPlant(int x) {
         BatchingPlant batchingPlant = new BatchingPlant();
         batchingPlant.setCompany("test");
-        batchingPlant.setName("x");
+        batchingPlant.setName("x" + x);
         batchingPlant.setLatitude(Double.valueOf(46.775980 + (Math.random()*10 * x)).toString());
         batchingPlant.setLongitude(Double.valueOf(23.598660+ (Math.random()*10 * x)).toString());
         return batchingPlant;
