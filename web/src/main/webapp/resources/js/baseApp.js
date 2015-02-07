@@ -20,7 +20,7 @@ jQuery(document).ready(function ($) {
             app.truckInfoViewRef.remove(app.truckInfoViewRef);
         }
     });
-    app.tpl.loadTemplates(['truckInfo'], function () {
+    app.tpl.loadTemplates(['truckInfo','truckInfoUL'], function () {
         app.mapPointsViewRef = new app.mapPointsView({
             collection: app.trucksPointsCol
         });
@@ -41,18 +41,19 @@ jQuery(document).ready(function ($) {
     app.trucksPointsCol.fetch();
     app.batchingPlants.fetch();
     app.deliverySites.fetch();
-//    timeout();
+    updateTrucksPos();
 });
 
-function timeout() {
+function updateTrucksPos() {
     //animate this map!
     setTimeout(function () {
-        var model = app.trucksPointsCol.models[ Math.floor(Math.random() * app.trucksPointsCol.length)];
-        var newLat = model.get('latitude') + Math.random() / 10 - Math.random() / 10;
-        var newLng = model.get('longitude') + Math.random() / 10 - Math.random() / 10;
-        model.set('latitude', newLat);
-        model.set('longitude', newLng);
-        console.info('moved: ', model.cid)
-        timeout();
-    }, 2000);
+//        var model = app.trucksPointsCol.models[ Math.floor(Math.random() * app.trucksPointsCol.length)];
+//        var newLat = model.get('latitude') + Math.random() / 10 - Math.random() / 10;
+//        var newLng = model.get('longitude') + Math.random() / 10 - Math.random() / 10;
+//        model.set('latitude', newLat);
+//        model.set('longitude', newLng);
+//        console.info('moved: ', model.cid)
+        app.trucksPointsCol.fetch();
+        updateTrucksPos();
+    }, 30000);
 }

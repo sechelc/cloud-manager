@@ -11,12 +11,18 @@ $(function () {
         initialize: function () {
             this.listenTo(this.model, 'change sync', this.render);
             this.template = _.template(app.tpl.get('truckInfo'));
+            this.templateUL = _.template(app.tpl.get('truckInfoUL'));
+            this.chartOpened = false;
         },
         render: function () {
-            this.$el.html(this.template({model: this.model}));
-            this.$el.animate({
-                height: '15%'
-            }, 500);
+            if (this.chartOpened) {
+                this.$el.find('ul').html(this.templateUL({model: this.model}));
+            } else {
+                this.$el.html(this.template({model: this.model}));
+                this.$el.animate({
+                    height: '15%'
+                }, 500);
+            }
             return this;
         },
         remove: function (self) {
@@ -26,14 +32,16 @@ $(function () {
                 self.$el.html('');
                 self.$el.find('#chart').empty();
             });
+            this.chartOpened = false;
             self.stopListening();
         },
         showChart: function (e) {
-            app.drawTruckRecentInfoChart(this.model.get('truckNo'), this.$el.find('#truckRecentInfoChart'));
+            app.getChartDataAndDraw(this.model.get('truckNo'), this.$el.find('#truckRecentInfoChart'));
             this.$el.animate({
                 height: '95%'
             }, 200);
             $(e.currentTarget).addClass('hide').siblings("#hideChart").removeClass('hide');
+            this.chartOpened = true;
         },
         hideChart: function (e) {
             this.$el.animate({
@@ -41,6 +49,7 @@ $(function () {
             }, 200);
             this.$el.find('#truckRecentInfoChart').empty();
             $(e.currentTarget).addClass('hide').siblings("#showChart").removeClass('hide');
+            this.chartOpened = false;
         }
     });
 
