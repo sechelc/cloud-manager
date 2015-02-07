@@ -4,7 +4,10 @@ import com.sechelc.cloud.manager.account.Account;
 import com.sechelc.cloud.manager.account.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import javax.inject.Inject;
 
 /**
  * Created by sechelc on 07.02.2015.
@@ -14,14 +17,16 @@ public class LoginController {
     @Autowired
     private AccountRepository accountRepository;
 
+    @Inject
+    private PasswordEncoder passwordEncoder;
 
     @RequestMapping(value = "login/android", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
     public String getGraphData(@RequestParam("userName") String username, @RequestParam("password") String password, @RequestParam("truckNo") String truckNo) {
         Account byEmail = accountRepository.findByEmail(username);
-        if (byEmail != null && byEmail.getPassword().equals(password)) {
+        if (byEmail != null && byEmail.getPassword().equals(passwordEncoder.encode(password))) {
             return "test";
-        } else return null;
+        } else return "error:" + username +"|"+ password +"|"+ truckNo;
     }
 
 }
