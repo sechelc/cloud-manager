@@ -7,7 +7,7 @@ import java.util.List;
  * Created by sechelc on 07.02.2015.
  */
 public class GraphData {
-    List<String[]> graphData = new ArrayList<>();
+    private List<String[]> graphData = new ArrayList<>();
 
     public void addDataPoint(LogEntry logEntry){
         String[] dataPoints = new String[5];
@@ -17,5 +17,13 @@ public class GraphData {
         dataPoints[3] = logEntry.getSlump();
         dataPoints[4] = logEntry.getVolume();
         graphData.add(dataPoints);
+    }
+
+    public List<String[]> getGraphData() {
+        return graphData;
+    }
+
+    public void setGraphData(List<String[]> graphData) {
+        this.graphData = graphData;
     }
 }

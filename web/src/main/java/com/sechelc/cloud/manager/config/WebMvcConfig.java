@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.converter.protobuf.ProtobufHttpMessageConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,6 +61,7 @@ class WebMvcConfig extends WebMvcConfigurationSupport {
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         ProtobufHttpMessageConverter protobufHttpMessageConverter = new ProtobufHttpMessageConverter();
         converters.add(protobufHttpMessageConverter);
+        converters.add(new MappingJackson2HttpMessageConverter());
 
         super.configureMessageConverters(converters);
     }

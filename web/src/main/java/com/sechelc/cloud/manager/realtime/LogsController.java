@@ -15,7 +15,7 @@ public class LogsController {
     private LogsRepository logsRepository;
 
 
-    @RequestMapping(value = "log/graph", method = RequestMethod.GET)
+    @RequestMapping(value = "logs/graph", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     public GraphData getGraphData(@RequestParam String truckNo){
         GraphData graphData = new GraphData();
