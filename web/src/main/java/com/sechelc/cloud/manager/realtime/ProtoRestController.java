@@ -1,23 +1,33 @@
 package com.sechelc.cloud.manager.realtime;
 
+
 import com.sechelc.cloud.manager.model.LogEntryProtocol;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletInputStream;
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 
 /**
  * Created by sechelc on 01.02.2015.
  */
 @RestController
 public class ProtoRestController {
-
+    final static Logger logger = LoggerFactory.getLogger(ProtoRestController.class);
     @Resource
     private LogsRepository logsRepository;
 
     @RequestMapping(value = "/addLog", method = RequestMethod.POST, consumes = "application/x-protobuf")
     @ResponseStatus(value = HttpStatus.OK)
-    public void greeting(@RequestParam(value="log") LogEntryProtocol.LogEntry logEntryProtocol) {
+    public void greeting(HttpServletRequest request) throws IOException {
+        logger.info("a call was made");
+
+        ServletInputStream inputStream = request.getInputStream();
+        LogEntryProtocol.LogEntry logEntryProtocol = LogEntryProtocol.LogEntry.newBuilder().mergeFrom(inputStream).build();
         LogEntry logEntry = new LogEntry();
         logEntry.setAddedWater(logEntryProtocol.getAddedWater());
         logEntry.setAngle(logEntryProtocol.getAngle());
