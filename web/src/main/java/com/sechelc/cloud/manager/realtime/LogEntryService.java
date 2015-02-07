@@ -38,7 +38,7 @@ public class LogEntryService {
             } else{
                 logEntry.setVolume(String.valueOf(100 - (300 - i )));
             }
-            logEntry.setTimestamp(i * 100);
+            logEntry.setTimestamp(System.currentTimeMillis() + i * 30000);
             logsRepository.save(logEntry);
         }
     }
