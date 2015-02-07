@@ -32,6 +32,19 @@ app.tpl = {
 
 };
 
+app.timeConverter = function (UNIX_timestamp) {
+    var a = new Date(UNIX_timestamp);
+    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var year = a.getFullYear();
+    var month = months[a.getMonth()];
+    var date = a.getDate() < 10 ? '0' + a.getDate() : a.getDate();
+    var hour = a.getHours() < 10 ? '0' + a.getHours() : a.getHours();
+    var min = a.getMinutes() < 10 ? '0' + a.getMinutes() : a.getMinutes();
+    var sec = a.getSeconds() < 10 ? '0' + a.getSeconds() : a.getSeconds();
+    var time = date + '-' + month + '-' + year + ' ' + hour + ':' + min + ':' + sec;
+    return time;
+}
+
 app.drawTruckRecentInfoChart = function (truckNo, container) {
     //get data for chart...
     var data = [
@@ -137,7 +150,7 @@ app.drawTruckRecentInfoChart = function (truckNo, container) {
         [1159401600000, 77.02, 77.48, 75.95, 77.01, 25862827],
         [1159488000000, 77.11, 77.52, 76.68, 76.98, 14497437]
     ],
-            i=0, data0=[], data1=[], data2=[], data3=[],
+            i = 0, data0 = [], data1 = [], data2 = [], data3 = [],
             // set the allowed units for data grouping
             groupingUnits = [[
                     'week', // unit name
@@ -176,8 +189,8 @@ app.drawTruckRecentInfoChart = function (truckNo, container) {
                     });
                 }
             },
-            height:'500',
-            zoomType:'x'
+            height: '500',
+            zoomType: 'x'
         },
         rangeSelector: {
             selected: 0
