@@ -31,7 +31,7 @@ $(function () {
         showChart: function (e) {
             app.drawTruckRecentInfoChart(this.model.get('truckNo'), this.$el.find('#truckRecentInfoChart'));
             this.$el.animate({
-                height: '65%'
+                height: '95%'
             }, 200);
             $(e.currentTarget).addClass('hide').siblings("#hideChart").removeClass('hide');
         },
