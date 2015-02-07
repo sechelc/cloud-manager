@@ -52,9 +52,9 @@ public class LogEntryService {
         logEntry.setChargerVoltage("12");
         logEntry.setCompany("test");
         logEntry.setDrumState("12");
-        logEntry.setLatitude("46.775980");
         logEntry.setLogQty("10");
-        logEntry.setLongitude("23.598660");
+        logEntry.setLatitude(Double.valueOf(46.775980 + (Math.random() * 7 * Integer.valueOf(x)%10)).toString());
+        logEntry.setLongitude(Double.valueOf(23.598660 + (Math.random() * 15  * Integer.valueOf(x)%10)).toString());
         logEntry.setMeasurementIndex("10");
         logEntry.setMeasVolume("10");
         logEntry.setPairLinkQuality("10");
