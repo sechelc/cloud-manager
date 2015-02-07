@@ -17,17 +17,17 @@ public class BatchingPlantService {
     @PostConstruct
     public void initialize() {
         for (int i = 0; i <= 5; i++) {
-            BatchingPlant batchingPlant = BatchingPlant(i);
+            BatchingPlant batchingPlant = getbatchingPlant(i);
             batchingPlantRepository.save(batchingPlant);
         }
     }
 
-    private BatchingPlant BatchingPlant(int x) {
+    private BatchingPlant getbatchingPlant(int x) {
         BatchingPlant batchingPlant = new BatchingPlant();
         batchingPlant.setCompany("test");
         batchingPlant.setName("x" + x);
-        batchingPlant.setLatitude(Double.valueOf(46.775980 + (Math.random()*10 * x)).toString());
-        batchingPlant.setLongitude(Double.valueOf(23.598660+ (Math.random()*10 * x)).toString());
+        batchingPlant.setLatitude(Double.valueOf(46.775980 + (Math.random() * 10 * x)).toString());
+        batchingPlant.setLongitude(Double.valueOf(23.598660 + (Math.random() * 10 * x)).toString());
         return batchingPlant;
     }
 }
