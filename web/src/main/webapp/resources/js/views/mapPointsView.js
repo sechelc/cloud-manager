@@ -45,7 +45,7 @@ $(function () {
     });
 
     app.mapPointsView = Backbone.View.extend({
-        template: _.template('<li><b>Name: </b>TruckNo <%=model.get("truckNo")%></li><li><b>Last Updated: </b><%=model.get("timestamp")%></li>'),
+        template: _.template('<li><b>Name: </b>TruckNo <%=model.get("truckNo")%></li><li><b>Last Updated: </b><%= app.timeConverter(model.get("timestamp"))%></li>'),
         tagName: 'ul',
         events: {
 //        "click .toggle": "toggleDone",
@@ -97,7 +97,7 @@ $(function () {
         }
     });
     app.staticPointsView = Backbone.View.extend({
-        template: _.template('<li><b>Name: </b><%=model.get("name")%></li>'),
+        template: _.template('<li><b>Name: </b><%=model.get("name")%></li><li><b>Type: </b><%= model.collection.type == "ds" ? "Delivery Point" : model.collection.type == "bp" ? "Batching Plant" : "Unknown" %></li>'),
         tagName: 'ul',
         initialize: function () {
             this.listenTo(this.collection, 'change sync', this.render);
