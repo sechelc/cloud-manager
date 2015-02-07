@@ -17,12 +17,12 @@ public class DeliverySiteService {
     @PostConstruct
     public void initialize() {
         for (int i = 0; i <= 5; i++) {
-            DeliverySite batchingPlant = BatchingPlant(i);
+            DeliverySite batchingPlant = getDeliverySite(i);
             deliverySiteRepository.save(batchingPlant);
         }
     }
 
-    private DeliverySite BatchingPlant(int x) {
+    private DeliverySite getDeliverySite(int x) {
         DeliverySite batchingPlant = new DeliverySite();
         batchingPlant.setCompany("test");
         batchingPlant.setName("x" + x);
