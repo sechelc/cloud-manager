@@ -53,8 +53,8 @@ public class LogEntryService {
         logEntry.setCompany("test");
         logEntry.setDrumState("12");
         logEntry.setLogQty("10");
-        logEntry.setLatitude(Double.valueOf(46.775980 + (Math.random() * 7 * Integer.valueOf(x)%10)).toString());
-        logEntry.setLongitude(Double.valueOf(23.598660 + (Math.random() * 15  * Integer.valueOf(x)%10)).toString());
+        logEntry.setLatitude(Double.valueOf(45.775980 + (Math.random() * 3 * Integer.valueOf(x)%3)).toString());
+        logEntry.setLongitude(Double.valueOf(24.598660 + (Math.random() * 3  * Integer.valueOf(x)%3)).toString());
         logEntry.setMeasurementIndex("10");
         logEntry.setMeasVolume("10");
         logEntry.setPairLinkQuality("10");

@@ -26,8 +26,8 @@ public class DeliverySiteService {
         DeliverySite batchingPlant = new DeliverySite();
         batchingPlant.setCompany("test");
         batchingPlant.setName("x" + x);
-        batchingPlant.setLatitude(Double.valueOf(43.775980 + (Math.random() * 6 * x)).toString());
-        batchingPlant.setLongitude(Double.valueOf(25.598660 + (Math.random() * 15 * x)).toString());
+        batchingPlant.setLatitude(Double.valueOf(48.775980 + (Math.random() * 2 * (x%3))).toString());
+        batchingPlant.setLongitude(Double.valueOf(30.598660 + (Math.random() * 2 * (x%3))).toString());
         return batchingPlant;
     }
 }
