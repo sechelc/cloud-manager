@@ -10,22 +10,26 @@ import java.util.List;
 public class GraphData {
     private List<BigDecimal[]> graphData = new ArrayList<>();
 
-    public void addDataPoint(LogEntry logEntry, String lastSpeed, String lastVolume, String lastSlump, String lastTempProbe){
+    public void addDataPoint(LogEntry logEntry, String lastSpeed, String lastVolume, String lastSlump, String lastTempProbe, String lastPressure){
         BigDecimal[] dataPoints = new BigDecimal[5];
         String speed = logEntry.getSpeed();
         String tempProbe = logEntry.getTempProbe();
         String slump = logEntry.getSlump();
         String volume = logEntry.getVolume();
+        String pressure = logEntry.getPressure();
         speed= getBestValue(speed, lastSpeed);
         volume= getBestValue(volume, lastVolume);
         slump= getBestValue(slump, lastSlump);
         tempProbe= getBestValue(tempProbe, lastTempProbe);
+        pressure= getBestValue(pressure, lastPressure);
 
         dataPoints[0] = BigDecimal.valueOf(logEntry.getTimestamp()).setScale(0, BigDecimal.ROUND_HALF_UP);
         dataPoints[1] = new BigDecimal(speed).setScale(2, BigDecimal.ROUND_HALF_UP);
-        dataPoints[4] = new BigDecimal(tempProbe).setScale(2, BigDecimal.ROUND_HALF_UP);
+        dataPoints[3] = new BigDecimal(tempProbe).setScale(2, BigDecimal.ROUND_HALF_UP);
         dataPoints[2] = new BigDecimal(slump).setScale(2, BigDecimal.ROUND_HALF_UP);
-        dataPoints[3] =new BigDecimal(volume).setScale(2, BigDecimal.ROUND_HALF_UP);
+        dataPoints[4] =new BigDecimal(volume).setScale(2, BigDecimal.ROUND_HALF_UP);
+
+        dataPoints[5] =new BigDecimal(pressure).setScale(2, BigDecimal.ROUND_HALF_UP);
         graphData.add(dataPoints);
     }
 

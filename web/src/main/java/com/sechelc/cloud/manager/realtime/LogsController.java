@@ -22,6 +22,7 @@ public class LogsController {
         String lastVolume="0";
         String lastSlump="0";
         String lastTempProbe="0";
+        String lastPressure="0";
         GraphData graphData = new GraphData();
         List<LogEntry> byTruckNo = logsRepository.findByTruckNo(truckNo);
         for (LogEntry logEntry : byTruckNo) {
@@ -29,7 +30,8 @@ public class LogsController {
             lastVolume = getBestValue(lastVolume, logEntry.getVolume());
             lastSlump = getBestValue(lastSlump, logEntry.getSlump());
             lastTempProbe = getBestValue(lastTempProbe, logEntry.getTempProbe());
-            graphData.addDataPoint(logEntry, lastSpeed, lastVolume, lastSlump, lastTempProbe);
+            lastPressure = getBestValue(lastPressure, logEntry.getPressure());
+            graphData.addDataPoint(logEntry, lastSpeed, lastVolume, lastSlump, lastTempProbe, lastPressure);
         }
         return graphData;
     }
@@ -48,6 +50,7 @@ public class LogsController {
         String lastVolume="0";
         String lastSlump="0";
         String lastTempProbe="0";
+        String lastPressure="0";
         GraphData graphData = new GraphData();
         List<LogEntry> byTruckNo = logsRepository.findByTruckNoAndTimestampGreaterThan(truckNo, timestamp);
         for (LogEntry logEntry : byTruckNo) {
@@ -55,7 +58,8 @@ public class LogsController {
             lastVolume = getBestValue(lastVolume, logEntry.getVolume());
             lastSlump = getBestValue(lastSlump, logEntry.getSlump());
             lastTempProbe = getBestValue(lastTempProbe, logEntry.getTempProbe());
-            graphData.addDataPoint(logEntry, lastSpeed, lastVolume, lastSlump, lastTempProbe);
+            lastPressure = getBestValue(lastPressure, logEntry.getPressure());
+            graphData.addDataPoint(logEntry, lastSpeed, lastVolume, lastSlump, lastTempProbe, lastPressure);
         }
         return graphData;
     }
