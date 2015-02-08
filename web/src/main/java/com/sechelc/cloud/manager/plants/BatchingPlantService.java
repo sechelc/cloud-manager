@@ -16,7 +16,7 @@ public class BatchingPlantService {
 
     @PostConstruct
     public void initialize() {
-        for (int i = 0; i <= 5; i++) {
+        for (int i = 0; i <= 2; i++) {
             BatchingPlant batchingPlant = getbatchingPlant(i);
             batchingPlantRepository.save(batchingPlant);
         }
@@ -26,8 +26,8 @@ public class BatchingPlantService {
         BatchingPlant batchingPlant = new BatchingPlant();
         batchingPlant.setCompany("test");
         batchingPlant.setName("x" + x);
-        batchingPlant.setLatitude(Double.valueOf(40.775980 + (Math.random() * 2 * (x%3))).toString());
-        batchingPlant.setLongitude(Double.valueOf(20.598660 + (Math.random() * 2 * (x%3))).toString());
+        batchingPlant.setLatitude(Double.valueOf(45.775980 + (Math.random() * 2 * (x%3)/10)).toString());
+        batchingPlant.setLongitude(Double.valueOf(24.598660 + (Math.random() * 2 * (x%3)/10)).toString());
         return batchingPlant;
     }
 }
