@@ -1,8 +1,8 @@
-<li><b>Speed: </b><span class="red"><%=model.get("speed")%></span></li>
-<li><b>Pressure: </b><span class="red"><%=model.get("pressure")%></span></li>
-<li><b>Yield: </b><span class="red"><%=model.get("yield")%></span></li>
-<li><b>Viscosity: </b><span class="red"><%=model.get("viscosity")%></span></li>
-<li><b>Slump: </b><span class="red"><%=model.get("slump")%></span></li>
-<li><b>Temperature: </b><span class="red"><%=model.get("tempProbe")%></span></li>
-<li><b>Volume: </b><span class="red"><%=model.get("volume")%></span></li>
+<li><b>Speed: </b><span class="red"><%= parseFloat(model.get("speed")).toFixed(2)%></span></li>
+<li><b>Pressure: </b><span class="red"><%= parseFloat(model.get("pressure")).toFixed(2)%></span></li>
+<li><b>Yield: </b><span class="red"><%= parseFloat(model.get("yield")).toFixed(2)%></span></li>
+<li><b>Viscosity: </b><span class="red"><%= parseFloat(model.get("viscosity")).toFixed(2)%></span></li>
+<li><b>Slump: </b><span class="red"><%= parseFloat(model.get("slump")).toFixed(2)%></span></li>
+<li><b>Temperature: </b><span class="red"><%= parseFloat(model.get("tempProbe")).toFixed(2)%></span></li>
+<li><b>Volume: </b><span class="red"><%= parseFloat(model.get("volume")).toFixed(2)%></span></li>
 <li><b>Truck No: </b><span class="red"><%=model.get('truckNo')%></span></li>
