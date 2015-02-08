@@ -11,7 +11,7 @@ public class GraphData {
     private List<BigDecimal[]> graphData = new ArrayList<>();
 
     public void addDataPoint(LogEntry logEntry, String lastSpeed, String lastVolume, String lastSlump, String lastTempProbe, String lastPressure){
-        BigDecimal[] dataPoints = new BigDecimal[5];
+        BigDecimal[] dataPoints = new BigDecimal[6];
         String speed = logEntry.getSpeed();
         String tempProbe = logEntry.getTempProbe();
         String slump = logEntry.getSlump();
@@ -25,8 +25,8 @@ public class GraphData {
 
         dataPoints[0] = BigDecimal.valueOf(logEntry.getTimestamp()).setScale(0, BigDecimal.ROUND_HALF_UP);
         dataPoints[1] = new BigDecimal(speed).setScale(2, BigDecimal.ROUND_HALF_UP);
-        dataPoints[3] = new BigDecimal(tempProbe).setScale(2, BigDecimal.ROUND_HALF_UP);
         dataPoints[2] = new BigDecimal(slump).setScale(2, BigDecimal.ROUND_HALF_UP);
+        dataPoints[3] = new BigDecimal(tempProbe).setScale(2, BigDecimal.ROUND_HALF_UP);
         dataPoints[4] =new BigDecimal(volume).setScale(2, BigDecimal.ROUND_HALF_UP);
 
         dataPoints[5] =new BigDecimal(pressure).setScale(2, BigDecimal.ROUND_HALF_UP);
