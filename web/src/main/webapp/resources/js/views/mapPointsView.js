@@ -32,6 +32,7 @@ $(function () {
                 self.$el.html('');
                 self.$el.find('#chart').empty();
             });
+            app.destroyTruckRecentInfoChart(this.$el.find('#truckRecentInfoChart'));
             this.chartOpened = false;
             self.stopListening();
         },
@@ -47,7 +48,7 @@ $(function () {
             this.$el.animate({
                 height: '15%'
             }, 200);
-            this.$el.find('#truckRecentInfoChart').empty();
+            app.destroyTruckRecentInfoChart(this.$el.find('#truckRecentInfoChart'));
             $(e.currentTarget).addClass('hide').siblings("#showChart").removeClass('hide');
             this.chartOpened = false;
         }

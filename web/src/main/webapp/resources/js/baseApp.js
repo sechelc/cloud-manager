@@ -42,7 +42,7 @@ jQuery(document).ready(function ($) {
     app.trucksPointsCol.fetch();
     app.batchingPlants.fetch();
     app.deliverySites.fetch();
-//    updateTrucksPos();
+    updateTrucksPos();
 });
 
 function updateTrucksPos() {

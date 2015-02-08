@@ -156,18 +156,20 @@ app.getChartDataAndDraw = function (truckNo, container) {
         success: function (response) {
             if (response.graphData)
                 data = response.graphData;
-            app.drawTruckRecentInfoChart(data, container);
+            app.drawTruckRecentInfoChart(data, container, truckNo);
         }
     });
 };
 
-app.drawTruckRecentInfoChart = function (data, container) {
+app.drawTruckRecentInfoChart = function (data, container, truckNo) {
     //get data for chart...
 //    console.warn(data);
     var
             i = 0, data0 = [], data1 = [], data2 = [], data3 = [],
             // set the allowed units for data grouping
-            dataLength = data.length;
+            dataLength = data.length,
+            lastTimestamp = data[dataLength - 1][0];
+
     for (i; i < dataLength; i += 1) {
         data0.push([
             parseFloat(data[i][0], 10), // the date
@@ -192,17 +194,43 @@ app.drawTruckRecentInfoChart = function (data, container) {
         chart: {
             events: {
                 load: function () {
+                    var self = this;
                     // set up the updating of the chart each second
-                    $.each(this.series, function (i, series) {
-//                                console.warn(series);
-                    });
+                    this.updateInterval = setInterval(function () {
+                        $.get('logs/add', function () {
+                        });
+                        $.getJSON('logs/graphGreaterThan?truckNo=' + truckNo + '&timestamp=' + lastTimestamp, function (data) {
+                            if (data.graphData) {
+                                data = data.graphData;
+                                var dataLength = data.length;
+                                if (dataLength > 0) {
+                                    lastTimestamp = data[dataLength - 1][0];
+                                    var i = 0;
+                                    for (i; i < dataLength; i += 1) {
+                                        var x = data[i][0];
+                                        $.each(self.series, function (j, series) {
+                                            if (data[i][j + 1]) {
+                                                var y = data[i][j + 1];
+                                                series.addPoint([x, y], true, true);
+                                            }
+                                        });
+                                    }
+                                }
+                            }
+                        });
+                    }, 30000);
                 }
             },
             height: '500',
             backgroundColor: 'rgba(0,0,0,0)'
         },
+        tooltip: {
+            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+            borderColor: 'gray',
+            borderWidth: 1
+        },
         rangeSelector: {
-           enabled: false
+            enabled: false
         },
         colors: ['#FF0000', '#00FF00', '#0000FF', '#FFFFFF'],
         yAxis: [{
@@ -268,4 +296,10 @@ app.drawTruckRecentInfoChart = function (data, container) {
                 yAxis: 3
             }]
     });
+};
+app.destroyTruckRecentInfoChart = function (container) {
+    if (container.highcharts()) {
+        clearInterval(container.highcharts().updateInterval);
+        container.highcharts().destroy();
+    }
 };
