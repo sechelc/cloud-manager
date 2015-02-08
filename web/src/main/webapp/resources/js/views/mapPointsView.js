@@ -56,10 +56,11 @@ $(function () {
 
     app.mapPointsView = Backbone.View.extend({
         template: _.template('<li><b>Name: </b>TruckNo <%=model.get("truckNo")%></li><li><b>Last Updated: </b><%= app.timeConverter(model.get("timestamp"))%></li>'),
-        templateList: _.template('<li><b>Name: </b>TruckNo <%=model.get("truckNo")%></li>'),
         tagName: 'ul',
+        el: '#trucksUl',
         events: {
-//        "click .toggle": "toggleDone",
+            "click .truckLi": "highlighTruck"
+//        'hover truckLi':'animateHover'
 //        "dblclick .view": "edit",
 //        "click a.destroy": "clear",
 //        "keypress .edit": "updateOnEnter",
@@ -67,10 +68,12 @@ $(function () {
         },
         initialize: function () {
             this.listenTo(this.collection, 'change sync', this.render);
+            this.templateList = _.template(app.tpl.get('trucksList'));
         },
         render: function () {
             var self = this,
                     anyNew = false;
+            self.$el.html((this.templateList({collection: this.collection})));
             _.each(self.collection.models, function (model, index) {
                 var marker = model.get('marker');
                 if (!model.get('drawn')) {
@@ -108,6 +111,27 @@ $(function () {
             if (anyNew)
                 self.map.fitBounds(app.latlngbounds);
             return this;
+        },
+        highlighTruck: function (ev) {
+            var model = this.collection.get($(ev.currentTarget).data('cid'));
+            var marker = model.get('marker');
+            if (app.truckInfoViewRef) {
+                app.truckInfoViewRef.model = model;
+            } else {
+                app.truckInfoViewRef = new app.truckInfoView({
+                    model: model
+                });
+            }
+            app.truckInfoViewRef.render();
+//            marker.setIcon('resources/images/truckRED.png');
+            if (marker.getAnimation() !== null) {
+                marker.setAnimation(null);
+            } else {
+                marker.setAnimation(google.maps.Animation.BOUNCE);
+                setTimeout(function () {
+                    marker.setAnimation(null);
+                }, 5000);
+            }
         }
     });
     app.staticPointsView = Backbone.View.extend({

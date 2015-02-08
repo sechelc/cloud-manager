@@ -1,0 +1,8 @@
+<h4>Trucks List:</h4>
+<ul>
+    <% _.each(collection.models,function(model){ %>
+    <li class="truckLi" data-cid='<%=model.cid%>'>
+        TruckNo <%=model.get("truckNo")%>
+    </li>
+    <% })%>
+</ul>

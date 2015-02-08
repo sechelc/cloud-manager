@@ -3,6 +3,7 @@ function initialize() {
     var mapOptions = {
         center: {lat: 0, lng: 0},
         streetViewControl: false,
+        mapTypeControl: false,
         zoom: 0
     };
     var map = new google.maps.Map(document.getElementById('bigMap'),
@@ -16,33 +17,33 @@ jQuery(document).ready(function ($) {
     app.deliverySites = new app.staticPoints('ds', 'test');
     app.batchingPlants = new app.staticPoints('bp', 'test');
     google.maps.event.addListener(app.map, 'click', function (e) {
-        //render another view pop from bottom iooooiii
         if (app.truckInfoViewRef) {
             app.truckInfoViewRef.remove(app.truckInfoViewRef);
         }
     });
-    app.tpl.loadTemplates(['truckInfo', 'truckInfoUL'], function () {
+    //start backbone!
+    app.tpl.loadTemplates(['truckInfo', 'truckInfoUL', 'trucksList'], function () {
         app.mapPointsViewRef = new app.mapPointsView({
             collection: app.trucksPointsCol
         });
         app.mapPointsViewRef.map = app.map;
+
+        app.deliverySitesRef = new app.staticPointsView({
+            collection: app.deliverySites
+        });
+        app.deliverySitesRef.map = app.map;
+
+        app.batchingPlantsRef = new app.staticPointsView({
+            collection: app.batchingPlants
+        });
+        app.batchingPlantsRef.map = app.map;
+
+
+        app.batchingPlants.fetch();
+        app.deliverySites.fetch();
+        app.trucksPointsCol.fetch();
+        updateTrucksPos();
     });
-
-    app.deliverySitesRef = new app.staticPointsView({
-        collection: app.deliverySites
-    });
-    app.deliverySitesRef.map = app.map;
-
-    app.batchingPlantsRef = new app.staticPointsView({
-        collection: app.batchingPlants
-    });
-    app.batchingPlantsRef.map = app.map;
-
-
-    app.trucksPointsCol.fetch();
-    app.batchingPlants.fetch();
-    app.deliverySites.fetch();
-    updateTrucksPos();
 });
 
 function updateTrucksPos() {

@@ -14,9 +14,10 @@ app.truckPointModel = Backbone.Model.extend({
     parse: function (data) {
 //        data.latitude = parseInt(data.latitude, 10) + Math.random(0.05, 0.5);
 //        data.longitude = parseInt(data.longitude, 10) + Math.random(0.05, 0.5);
-        data.marker = new google.maps.Marker({
+        data.marker = this.get('marker') || new google.maps.Marker({
             position: new google.maps.LatLng(data.latitude, data.longitude),
             title: "Truck ID:" + data.truckNo,
+            animation: null,
             icon: {
                 url: 'resources/images/truck.png',
 //                size: new google.maps.Size(20, 32)
