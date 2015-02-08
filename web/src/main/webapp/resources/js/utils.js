@@ -62,7 +62,7 @@ app.drawTruckRecentInfoChart = function (data, container, truckNo) {
     //get data for chart...
 //    console.warn(data);
     var
-            i = 0, data0 = [], data1 = [], data2 = [], data3 = [],
+            i = 0, data0 = [], data1 = [], data2 = [], data3 = [],data4 = [],
             // set the allowed units for data grouping
             dataLength = data.length, max = 0,
             lastTimestamp = data[dataLength - 1][0];
@@ -78,11 +78,15 @@ app.drawTruckRecentInfoChart = function (data, container, truckNo) {
         ]);
         data2.push([
             data[i][0], // the date
-            data[i][3] // Volume
+            data[i][3] // tempProbe
         ]);
         data3.push([
             data[i][0], // the date
-            data[i][4] // tempProbe
+            data[i][4] // Volume
+        ]);
+        data4.push([
+            data[i][0], // the date
+            data[i][5] // pressure
         ]);
     }
 //    console.warn(data2);
@@ -118,7 +122,7 @@ app.drawTruckRecentInfoChart = function (data, container, truckNo) {
                     }, 30000);
                 }
             },
-            height: '500',
+            height: '700',
             backgroundColor: 'rgba(0,0,0,0)'
         },
         tooltip: {
@@ -135,31 +139,41 @@ app.drawTruckRecentInfoChart = function (data, container, truckNo) {
                 title: {
                     text: 'Speed'
                 },
-                height: '22%',
+                height: '20%',
                 offset: 0
             }, {
                 title: {
                     text: 'Slump'
                 },
-                top: '25%',
-                height: '22%',
+                top: '20%',
+                height: '20%',
                 offset: 0
 
             }, {
                 title: {
                     text: 'Temperature'
                 },
-                top: '50%',
-                height: '22%',
+                top: '40%',
+                height: '20%',
                 offset: 0
-            }, {
+            }, 
+            {
                 title: {
                     text: 'Volume'
                 },
-                top: '75%',
-                height: '22%',
+                top: '60%',
+                height: '20%',
                 offset: 0
-            }],
+            },
+            {
+                title: {
+                    text: 'Pressure'
+                },
+                top: '80%',
+                height: '20%',
+                offset: 0
+            }
+        ],
         series: [{
                 type: 'areaspline',
                 name: 'Speed',
@@ -175,20 +189,29 @@ app.drawTruckRecentInfoChart = function (data, container, truckNo) {
                 yAxis: 1
             },
             {
-                type: 'area',
-                name: 'Temperature',
-                data: data3,
-                id: '444',
-                yAxis: 2
-            },
-            {
                 type: 'areaspline',
-                name: 'Volume',
+                name: 'Temperature',
                 data: data2,
                 id: '444',
-                yAxis: 3
+                yAxis: 2
 
-            }]
+            },
+            {
+                type: 'area',
+                name: 'Volume',
+                data: data3,
+                id: '333',
+                yAxis: 3
+            },
+            {
+                type: 'line',
+                name: 'Pressure',
+                data: data4,
+                id: '444',
+                yAxis: 4
+
+            }
+        ]
     });
 };
 app.destroyTruckRecentInfoChart = function (container) {
