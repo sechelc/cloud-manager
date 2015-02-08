@@ -50,6 +50,9 @@ body.home form{
 #truckRecentInfoChart{
     margin: 10px 0 0 0;
 }
+#truckRecentInfoChart text.highcharts-yaxis-title{
+    fill: rgba(255,255,255,1)!important;
+}
 span.red{
     color: #ff3a3a;
     text-shadow: 0px 0px 2px #000;

@@ -170,23 +170,23 @@ app.drawTruckRecentInfoChart = function (data, container) {
             dataLength = data.length;
     for (i; i < dataLength; i += 1) {
         data0.push([
-            parseInt(data[i][0], 10), // the date
-            parseInt(data[i][1], 10) // speed
+            parseFloat(data[i][0], 10), // the date
+            parseFloat(data[i][1], 10) // speed
         ]);
         data1.push([
-            parseInt(data[i][0], 10), // the date
-            parseInt(data[i][2], 10) // Slump
+            parseFloat(data[i][0], 10), // the date
+            parseFloat(data[i][2], 10) // Slump
         ]);
         data2.push([
-            parseInt(data[i][0], 10), // the date
-            parseInt(data[i][3], 10) // Volume
+            parseFloat(data[i][0], 10), // the date
+            parseFloat(data[i][3], 10) // Volume
         ]);
         data3.push([
-            parseInt(data[i][0], 10), // the date
-            parseInt(data[i][4], 10) // tempProbe
+            parseFloat(data[i][0], 10), // the date
+            parseFloat(data[i][4], 10) // tempProbe
         ]);
     }
-//    console.warn(data0);
+//    console.warn(data1);
     // create the chart
     $(container).highcharts('StockChart', {
         chart: {
@@ -202,7 +202,7 @@ app.drawTruckRecentInfoChart = function (data, container) {
             backgroundColor: 'rgba(0,0,0,0)'
         },
         rangeSelector: {
-            selected: 1
+           enabled: false
         },
         colors: ['#FF0000', '#00FF00', '#0000FF', '#FFFFFF'],
         yAxis: [{
@@ -218,8 +218,6 @@ app.drawTruckRecentInfoChart = function (data, container) {
                 top: '25%',
                 height: '22%',
                 offset: 0,
-                min: -1,
-                max: 1,
                 startOnTick: false,
                 endOnTick: false,
                 lineWidth: 2
@@ -230,8 +228,6 @@ app.drawTruckRecentInfoChart = function (data, container) {
                 top: '50%',
                 height: '25%',
                 offset: 0,
-                min: -1,
-                max: 1,
                 startOnTick: false,
                 endOnTick: false,
                 lineWidth: 2
@@ -249,27 +245,27 @@ app.drawTruckRecentInfoChart = function (data, container) {
                 name: 'Speed',
                 id: '111',
                 data: data0,
-                yAxis: 0,
+                yAxis: 0
             }
             , {
                 type: 'line',
                 name: 'Slump',
                 data: data1,
                 id: '222',
-                yAxis: 1,
+                yAxis: 1
             }, {
                 type: 'column',
                 name: 'Volume',
                 data: data2,
                 id: '333',
-                yAxis: 2,
+                yAxis: 2
             },
             {
                 type: 'area',
                 name: 'Temperature',
                 data: data3,
                 id: '444',
-                yAxis: 3,
+                yAxis: 3
             }]
     });
 };
