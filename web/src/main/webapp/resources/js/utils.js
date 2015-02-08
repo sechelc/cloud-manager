@@ -122,6 +122,7 @@ app.drawTruckRecentInfoChart = function (data, container, truckNo) {
             backgroundColor: 'rgba(0,0,0,0)'
         },
         tooltip: {
+            valueDecimals: 2,
             backgroundColor: 'rgba(0, 0, 0, 0.9)',
             borderColor: 'gray',
             borderWidth: 1
@@ -182,7 +183,7 @@ app.drawTruckRecentInfoChart = function (data, container, truckNo) {
             },
             {
                 type: 'areaspline',
-                name: 'Temperature',
+                name: 'Volume',
                 data: data2,
                 id: '444',
                 yAxis: 3
