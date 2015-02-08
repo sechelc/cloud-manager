@@ -26,4 +26,15 @@ public class LogsController {
         return graphData;
     }
 
+    @RequestMapping(value = "logs/graphGreaterThan", method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public GraphData getGraphData(@RequestParam String truckNo, @RequestParam Long timestamp){
+        GraphData graphData = new GraphData();
+        List<LogEntry> byTruckNo = logsRepository.findByTruckNoAndTimestampGreaterThan(truckNo, timestamp);
+        for (LogEntry logEntry : byTruckNo) {
+            graphData.addDataPoint(logEntry);
+        }
+        return graphData;
+    }
+
 }

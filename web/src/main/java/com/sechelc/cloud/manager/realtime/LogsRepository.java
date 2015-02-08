@@ -13,6 +13,7 @@ public interface LogsRepository extends PagingAndSortingRepository<LogEntry, Lon
     List<LogEntry> findByTruckNo(@Param("truckNo") String name);
     @Query(value = "select l from  LogEntry l  where l.company=:company and l.timestamp=(select max(ee.timestamp) from LogEntry ee where ee.truckNo=l.truckNo)")
     List<LogEntry> findLatestByCompany(@Param("company") String name);
+    List<LogEntry> findByTruckNoAndTimestampGreaterThan(@Param("truckNo") String name, @Param("timestamp") Long timestamp);
 
 
 }
