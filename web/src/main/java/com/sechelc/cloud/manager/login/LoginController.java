@@ -24,9 +24,9 @@ public class LoginController {
     @ResponseStatus(value = HttpStatus.OK)
     public String getGraphData(@RequestParam("userName") String username, @RequestParam("password") String password, @RequestParam("truckNo") String truckNo) {
         Account byEmail = accountRepository.findByEmail(username);
-        if (byEmail != null && byEmail.getPassword().equals(passwordEncoder.encode(password))) {
+        if (byEmail != null && passwordEncoder.matches(password, byEmail.getPassword())) {
             return "test";
-        } else return "error:" + username +"|"+ password +"|"+ truckNo;
+        } else return "errors:" + username +"|"+ password +"|"+ truckNo + "|" + password;
     }
 
 }
