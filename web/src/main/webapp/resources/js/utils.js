@@ -172,20 +172,20 @@ app.drawTruckRecentInfoChart = function (data, container, truckNo) {
 
     for (i; i < dataLength; i += 1) {
         data0.push([
-            parseFloat(data[i][0], 10), // the date
-            parseFloat(data[i][1], 10) // speed
+            data[i][0], // the date
+            data[i][1] // speed
         ]);
         data1.push([
-            parseFloat(data[i][0], 10), // the date
-            parseFloat(data[i][2], 10) // Slump
+            data[i][0], // the date
+            data[i][2] // Slump
         ]);
         data2.push([
-            parseFloat(data[i][0], 10), // the date
-            parseFloat(data[i][3], 10) // Volume
+            data[i][0], // the date
+            data[i][3] // Volume
         ]);
         data3.push([
-            parseFloat(data[i][0], 10), // the date
-            parseFloat(data[i][4], 10) // tempProbe
+            data[i][0], // the date
+            data[i][4] // tempProbe
         ]);
     }
 //    console.warn(data1);
