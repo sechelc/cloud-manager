@@ -37,4 +37,16 @@ public class LogsController {
         return graphData;
     }
 
+    @RequestMapping(value = "logs/add", method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public void addEntry(){
+        LogEntry logEntry = LogEntryService.getLogEntry("100");
+        logEntry.setTempProbe("28.5");
+        logEntry.setPressure(String.valueOf(Math.tan(Math.floor(Math.random()*10) + 0.0d)*10));
+        logEntry.setSlump(String.valueOf(Math.cos(Math.floor(Math.random()*10) + 0.0d)*10));
+        logEntry.setSpeed(String.valueOf(Math.floor(Math.random()*10)));
+        logEntry.setTimestamp(System.currentTimeMillis() + 360*30000);
+        logsRepository.save(logEntry);
+    }
+
 }
