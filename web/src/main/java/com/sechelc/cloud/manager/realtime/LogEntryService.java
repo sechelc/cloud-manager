@@ -68,7 +68,7 @@ public class LogEntryService {
         logEntry.setTempProbe("28");
         logEntry.setTempReceiver("30");
         logEntry.setTimestamp(200);
-        logEntry.setTruckActivity("10");
+        logEntry.setTruckActivity("Site");
         logEntry.setTruckNo(x);
         logEntry.setTurnCountNeg("10");
         logEntry.setTurnCountPos("10");
