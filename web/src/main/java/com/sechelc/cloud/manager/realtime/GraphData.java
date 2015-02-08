@@ -1,5 +1,6 @@
 package com.sechelc.cloud.manager.realtime;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,23 +8,23 @@ import java.util.List;
  * Created by sechelc on 07.02.2015.
  */
 public class GraphData {
-    private List<String[]> graphData = new ArrayList<>();
+    private List<BigDecimal[]> graphData = new ArrayList<>();
 
     public void addDataPoint(LogEntry logEntry){
-        String[] dataPoints = new String[5];
-        dataPoints[0] = String.valueOf(logEntry.getTimestamp());
-        dataPoints[1] = logEntry.getSpeed();
-        dataPoints[2] = logEntry.getTempProbe();
-        dataPoints[3] = logEntry.getSlump();
-        dataPoints[4] = logEntry.getVolume();
+        BigDecimal[] dataPoints = new BigDecimal[5];
+        dataPoints[0] = BigDecimal.valueOf(logEntry.getTimestamp()).setScale(0, BigDecimal.ROUND_HALF_UP);
+        dataPoints[1] = new BigDecimal(logEntry.getSpeed()).setScale(2, BigDecimal.ROUND_HALF_UP);
+        dataPoints[2] = new BigDecimal(logEntry.getTempProbe()).setScale(2, BigDecimal.ROUND_HALF_UP);
+        dataPoints[3] = new BigDecimal(logEntry.getSlump()).setScale(2, BigDecimal.ROUND_HALF_UP);
+        dataPoints[4] =new BigDecimal(logEntry.getVolume()).setScale(2, BigDecimal.ROUND_HALF_UP);
         graphData.add(dataPoints);
     }
 
-    public List<String[]> getGraphData() {
+    public List<BigDecimal[]> getGraphData() {
         return graphData;
     }
 
-    public void setGraphData(List<String[]> graphData) {
+    public void setGraphData(List<BigDecimal[]> graphData) {
         this.graphData = graphData;
     }
 }

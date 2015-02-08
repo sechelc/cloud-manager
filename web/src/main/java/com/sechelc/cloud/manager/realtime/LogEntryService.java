@@ -27,9 +27,9 @@ public class LogEntryService {
 
         for (int i = 0; i <= 360; i++) {
             LogEntry logEntry = getLogEntry("100");
-            logEntry.setTempProbe(String.valueOf(Math.sin(i + 0.0d)));
-            logEntry.setPressure(String.valueOf(Math.tan(i + 0.0d)));
-            logEntry.setSlump(String.valueOf(Math.cos(i + 0.0d)));
+            logEntry.setTempProbe(String.valueOf(Math.sin(i + 0.0d)*10));
+            logEntry.setPressure(String.valueOf(Math.tan(i + 0.0d)*10));
+            logEntry.setSlump(String.valueOf(Math.cos(i + 0.0d)*10));
             logEntry.setSpeed(String.valueOf(i));
             if(i<100) {
                 logEntry.setVolume(String.valueOf(i));
