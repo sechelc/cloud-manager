@@ -56,6 +56,7 @@ $(function () {
 
     app.mapPointsView = Backbone.View.extend({
         template: _.template('<li><b>Name: </b>TruckNo <%=model.get("truckNo")%></li><li><b>Last Updated: </b><%= app.timeConverter(model.get("timestamp"))%></li>'),
+        templateList: _.template('<li><b>Name: </b>TruckNo <%=model.get("truckNo")%></li>'),
         tagName: 'ul',
         events: {
 //        "click .toggle": "toggleDone",
@@ -68,10 +69,12 @@ $(function () {
             this.listenTo(this.collection, 'change sync', this.render);
         },
         render: function () {
-            var self = this;
+            var self = this,
+                    anyNew = false;
             _.each(self.collection.models, function (model, index) {
                 var marker = model.get('marker');
                 if (!model.get('drawn')) {
+                    anyNew = true;
                     //draw new marker, attach events
                     marker.setMap(self.map);
                     model.set('drawn', true);
@@ -102,7 +105,8 @@ $(function () {
                 }
                 app.latlngbounds.extend(marker.getPosition());
             });
-            self.map.fitBounds(app.latlngbounds);
+            if (anyNew)
+                self.map.fitBounds(app.latlngbounds);
             return this;
         }
     });
