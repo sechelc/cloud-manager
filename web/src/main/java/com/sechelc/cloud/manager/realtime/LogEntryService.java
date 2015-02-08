@@ -16,7 +16,7 @@ public class LogEntryService {
 
     @PostConstruct
     public void initialize() {
-        for (int i = 0; i <= 30; i++) {
+        for (int i = 0; i <= 10; i++) {
             LogEntry logEntry = getLogEntry(String.valueOf(i));
             if (i % 2 == 0) {
                 logEntry.setCompany("altacompanie");
@@ -53,8 +53,8 @@ public class LogEntryService {
         logEntry.setCompany("test");
         logEntry.setDrumState("12");
         logEntry.setLogQty("10");
-        logEntry.setLatitude(Double.valueOf(45.775980 + (Math.random() * 3 * Integer.valueOf(x)%3)).toString());
-        logEntry.setLongitude(Double.valueOf(24.598660 + (Math.random() * 3  * Integer.valueOf(x)%3)).toString());
+        logEntry.setLatitude(Double.valueOf(45.475980 + (Math.random() * 3 * Integer.valueOf(x)%3)/10).toString());
+        logEntry.setLongitude(Double.valueOf(25.598660 + (Math.random() * 3  * Integer.valueOf(x)%3)/10).toString());
         logEntry.setMeasurementIndex("10");
         logEntry.setMeasVolume("10");
         logEntry.setPairLinkQuality("10");
