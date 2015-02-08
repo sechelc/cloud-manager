@@ -2,6 +2,7 @@ var app = app || {};
 function initialize() {
     var mapOptions = {
         center: {lat: 0, lng: 0},
+        streetViewControl: false,
         zoom: 0
     };
     var map = new google.maps.Map(document.getElementById('bigMap'),
@@ -20,7 +21,7 @@ jQuery(document).ready(function ($) {
             app.truckInfoViewRef.remove(app.truckInfoViewRef);
         }
     });
-    app.tpl.loadTemplates(['truckInfo','truckInfoUL'], function () {
+    app.tpl.loadTemplates(['truckInfo', 'truckInfoUL'], function () {
         app.mapPointsViewRef = new app.mapPointsView({
             collection: app.trucksPointsCol
         });
@@ -41,7 +42,7 @@ jQuery(document).ready(function ($) {
     app.trucksPointsCol.fetch();
     app.batchingPlants.fetch();
     app.deliverySites.fetch();
-    updateTrucksPos();
+//    updateTrucksPos();
 });
 
 function updateTrucksPos() {

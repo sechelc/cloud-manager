@@ -106,7 +106,7 @@ $(function () {
         }
     });
     app.staticPointsView = Backbone.View.extend({
-        template: _.template('<li><b>Name: </b><%=model.get("name")%></li><li><b>Type: </b><%= model.collection.type == "ds" ? "Delivery Point" : model.collection.type == "bp" ? "Batching Plant" : "Unknown" %></li>'),
+        template: _.template('<li><b>Name: </b><%=model.get("name")%></li><li><b>Type: </b><%= model.collection.type == "ds" ? "Delivery Site" : model.collection.type == "bp" ? "Batching Plant" : "Unknown" %></li>'),
         tagName: 'ul',
         initialize: function () {
             this.listenTo(this.collection, 'change sync', this.render);
