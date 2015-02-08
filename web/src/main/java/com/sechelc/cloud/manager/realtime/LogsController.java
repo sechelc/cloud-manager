@@ -18,21 +18,44 @@ public class LogsController {
     @RequestMapping(value = "logs/graph", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     public GraphData getGraphData(@RequestParam String truckNo){
+        String lastSpeed ="0";
+        String lastVolume="0";
+        String lastSlump="0";
+        String lastTempProbe="0";
         GraphData graphData = new GraphData();
         List<LogEntry> byTruckNo = logsRepository.findByTruckNo(truckNo);
         for (LogEntry logEntry : byTruckNo) {
-            graphData.addDataPoint(logEntry);
+            lastSpeed = getBestValue(lastSpeed, logEntry.getSpeed());
+            lastVolume = getBestValue(lastVolume, logEntry.getVolume());
+            lastSlump = getBestValue(lastSlump, logEntry.getSlump());
+            lastTempProbe = getBestValue(lastTempProbe, logEntry.getTempProbe());
+            graphData.addDataPoint(logEntry, lastSpeed, lastVolume, lastSlump, lastTempProbe);
         }
         return graphData;
+    }
+
+    private String getBestValue(String lastSpeed, String speed) {
+        if(!speed.contains("---")){
+            return speed;
+        }
+        return lastSpeed;
     }
 
     @RequestMapping(value = "logs/graphGreaterThan", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     public GraphData getGraphData(@RequestParam String truckNo, @RequestParam Long timestamp){
+        String lastSpeed ="0";
+        String lastVolume="0";
+        String lastSlump="0";
+        String lastTempProbe="0";
         GraphData graphData = new GraphData();
         List<LogEntry> byTruckNo = logsRepository.findByTruckNoAndTimestampGreaterThan(truckNo, timestamp);
         for (LogEntry logEntry : byTruckNo) {
-            graphData.addDataPoint(logEntry);
+            lastSpeed = getBestValue(lastSpeed, logEntry.getSpeed());
+            lastVolume = getBestValue(lastVolume, logEntry.getVolume());
+            lastSlump = getBestValue(lastSlump, logEntry.getSlump());
+            lastTempProbe = getBestValue(lastTempProbe, logEntry.getTempProbe());
+            graphData.addDataPoint(logEntry, lastSpeed, lastVolume, lastSlump, lastTempProbe);
         }
         return graphData;
     }

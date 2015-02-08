@@ -10,14 +10,35 @@ import java.util.List;
 public class GraphData {
     private List<BigDecimal[]> graphData = new ArrayList<>();
 
-    public void addDataPoint(LogEntry logEntry){
+    public void addDataPoint(LogEntry logEntry, String lastSpeed, String lastVolume, String lastSlump, String lastTempProbe){
         BigDecimal[] dataPoints = new BigDecimal[5];
+        String speed = logEntry.getSpeed();
+        String tempProbe = logEntry.getTempProbe();
+        String slump = logEntry.getSlump();
+        String volume = logEntry.getVolume();
+        speed= getBestValue(speed, lastSpeed);
+        volume= getBestValue(volume, lastVolume);
+        slump= getBestValue(slump, lastSlump);
+        tempProbe= getBestValue(tempProbe, lastTempProbe);
+
         dataPoints[0] = BigDecimal.valueOf(logEntry.getTimestamp()).setScale(0, BigDecimal.ROUND_HALF_UP);
-        dataPoints[1] = new BigDecimal(logEntry.getSpeed()).setScale(2, BigDecimal.ROUND_HALF_UP);
-        dataPoints[4] = new BigDecimal(logEntry.getTempProbe()).setScale(2, BigDecimal.ROUND_HALF_UP);
-        dataPoints[2] = new BigDecimal(logEntry.getSlump()).setScale(2, BigDecimal.ROUND_HALF_UP);
-        dataPoints[3] =new BigDecimal(logEntry.getVolume()).setScale(2, BigDecimal.ROUND_HALF_UP);
+        dataPoints[1] = new BigDecimal(speed).setScale(2, BigDecimal.ROUND_HALF_UP);
+        dataPoints[4] = new BigDecimal(tempProbe).setScale(2, BigDecimal.ROUND_HALF_UP);
+        dataPoints[2] = new BigDecimal(slump).setScale(2, BigDecimal.ROUND_HALF_UP);
+        dataPoints[3] =new BigDecimal(volume).setScale(2, BigDecimal.ROUND_HALF_UP);
         graphData.add(dataPoints);
+    }
+
+    private String getBestValue(String speed, String lastSpeed) {
+        if(speed.contains("---")){
+            if(!lastSpeed.contains("---")) {
+                return lastSpeed;
+            }
+            else{
+                return "0";
+            }
+        }
+        return speed;
     }
 
     public List<BigDecimal[]> getGraphData() {
