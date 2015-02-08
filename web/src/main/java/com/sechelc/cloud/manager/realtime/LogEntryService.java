@@ -43,7 +43,7 @@ public class LogEntryService {
         }
     }
 
-    private LogEntry getLogEntry(String x) {
+    public static LogEntry getLogEntry(String x) {
         LogEntry logEntry = new LogEntry();
         logEntry.setAddedWater("12");
         logEntry.setAngle("12");
