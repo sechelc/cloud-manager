@@ -148,7 +148,7 @@ $(function () {
             this.listOpened = !this.listOpened;
         },
         toggleSomeOfList: function (ev) {
-            alert('futincur!');
+//            alert('futincur!');
             this.$el.toggleClass("partialOpened");
         }
     });
