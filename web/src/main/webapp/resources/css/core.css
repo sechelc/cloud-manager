@@ -45,9 +45,11 @@ body.home form{
 #trucksUl ul{
     list-style: none;
 }
-.truckInfoInner ul li{
-    display: inline-table;
-    width: 24%;
+.truckInfoInner table tr td{
+    width: 17%;
+}
+.truckInfoInner table tr td.summaryLable{
+    width: 5%;
 }
 #truckRecentInfoChart{
     margin: 10px 0 0 0;
@@ -63,14 +65,70 @@ span.red{
 
 #trucksUl{
     top:50px;
-    width: 150px;
+    width: 160px;
     position: fixed;
-    right: 0;
+    right: -150px;
     background: rgba(0,0,0,0.65);
     color: whitesmoke;
+    border-bottom-left-radius: 4px;
+    transition: all 500ms ease-in-out;
 }
-
+#trucksUl.opened{
+    right: 0;
+}
+#trucksUl.partialOpened{
+    right: -120px;
+}
+#trucksUl h4{
+    text-align: center;
+}
+#trucksUl ul li{
+    border-bottom: 1px whitesmoke solid;
+    padding: 4px;
+    width: 100px;
+}
+#trucksUl ul li:last-of-type{
+    border-bottom: none;
+}
 #trucksUl ul li:hover{
     font-weight: bold;
     cursor: pointer;
+}
+.navbar-toggle.visible:focus{
+    outline: none;
+}
+.navbar-toggle.visible{
+    display: block!important;
+    margin: 0 0 0 -44px;
+    background: rgba(0,0,0,0.65);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.navbar-toggle .icon-bar:nth-of-type(2) {
+    top: 1px;
+}
+
+.navbar-toggle .icon-bar:nth-of-type(3) {
+    top: 2px;
+}
+
+.navbar-toggle .icon-bar {
+    position: relative;
+    transition: all 500ms ease-in-out;
+    background-color:#fff;
+}
+
+.navbar-toggle.active .icon-bar:nth-of-type(1) {
+    top: 6px;
+    transform: rotate(45deg);
+}
+
+.navbar-toggle.active .icon-bar:nth-of-type(2) {
+    background-color: transparent;
+}
+
+.navbar-toggle.active .icon-bar:nth-of-type(3) {
+    top: -6px;
+    transform: rotate(-45deg);
 }

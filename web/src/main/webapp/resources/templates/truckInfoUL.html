@@ -1,9 +1,15 @@
-<li><b>Truck No: </b><span class="red"><%= model.get('truckNo')%></span></li>
-<li><b>Truck Activity: </b><span class="red"><%= model.get('truckActivity')%></span></li>
-<li><b>Speed: </b><span class="red"><%= parseFloat(model.get("speed"),10) ? parseFloat(model.get("speed"),10).toFixed(2) : 'N/A' %></span></li>
-<li><b>Pressure: </b><span class="red"><%= parseFloat(model.get("pressure"),10) ? parseFloat(model.get("pressure"),10).toFixed(2) : 'N/A' %></span></li>
-<li><b>Yield: </b><span class="red"><%= parseFloat(model.get("yield"),10) ? parseFloat(model.get("yield"),10).toFixed(2) : 'N/A' %></span></li>
-<li><b>Viscosity: </b><span class="red"><%= parseFloat(model.get("viscosity"),10) ? parseFloat(model.get("viscosity"),10).toFixed(2) : 'N/A' %></span></li>
-<li><b>Slump: </b><span class="red"><%= parseFloat(model.get("slump"),10) ? parseFloat(model.get("slump"),10).toFixed(2) : 'N/A' %></span></li>
-<li><b>Temperature: </b><span class="red"><%= parseFloat(model.get("tempProbe"),10) ? parseFloat(model.get("tempProbe"),10).toFixed(2) : 'N/A' %></span></li>
-<li><b>Volume: </b><span class="red"><%= parseFloat(model.get("volume"),10) ? parseFloat(model.get("volume"),10).toFixed(2) : 'N/A' %></span></li>
+<tr>
+    <td class="summaryLable" ><b>Truck No: </b></td><td  ><span class="red"><%= model.get('truckNo')%></span></td>
+    <td class="summaryLable"><b>Truck Activity: </b></td><td  ><span class="red"><%= model.get('truckActivity')%></span></td>
+    <td class="summaryLable"><b>Speed: </b></td><td  ><span class="red"><%= parseFloat(model.get("speed"),10) ? parseFloat(model.get("speed"),10).toFixed(2) : 'N/A' %></span></td>
+</tr>
+<tr>
+    <td class="summaryLable"><b>Pressure: </b></td><td  ><span class="red"><%= parseFloat(model.get("pressure"),10) ? parseFloat(model.get("pressure"),10).toFixed(2) : 'N/A' %></span></td>
+    <td class="summaryLable"><b>Yield: </b></td><td  ><span class="red"><%= parseFloat(model.get("yield"),10) ? parseFloat(model.get("yield"),10).toFixed(2) : 'N/A' %></span></td>
+    <td class="summaryLable"><b>Viscosity: </b></td><td  ><span class="red"><%= parseFloat(model.get("viscosity"),10) ? parseFloat(model.get("viscosity"),10).toFixed(2) : 'N/A' %></span></td>
+</tr>
+<tr>
+    <td class="summaryLable"><b>Slump: </b></td><td  ><span class="red"><%= parseFloat(model.get("slump"),10) ? parseFloat(model.get("slump"),10).toFixed(2) : 'N/A' %></span></td>
+    <td class="summaryLable"><b>Temperature: </b></td><td  ><span class="red"><%= parseFloat(model.get("tempProbe"),10) ? parseFloat(model.get("tempProbe"),10).toFixed(2) : 'N/A' %></span></td>
+    <td class="summaryLable"><b>Volume: </b></td><td  ><span class="red"><%= parseFloat(model.get("volume"),10) ? parseFloat(model.get("volume"),10).toFixed(2) : 'N/A' %></span></td>
+</tr>

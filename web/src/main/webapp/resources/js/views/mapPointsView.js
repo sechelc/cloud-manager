@@ -12,11 +12,18 @@ $(function () {
             this.listenTo(this.model, 'change sync', this.render);
             this.template = _.template(app.tpl.get('truckInfo'));
             this.templateUL = _.template(app.tpl.get('truckInfoUL'));
-            this.chartOpened = false;
+            this.chartOpened = 1;
         },
         render: function () {
-            if (this.chartOpened) {
-                this.$el.find('ul').html(this.templateUL({model: this.model}));
+            if (this.chartOpened === 1) {
+                //first time
+                this.$el.html(this.template({model: this.model}));
+                this.$el.animate({
+                    height: '15%'
+                }, 500);
+                this.$el.find('table').html(this.templateUL({model: this.model}));
+            } else if (this.chartOpened) {
+                this.$el.find('table').html(this.templateUL({model: this.model}));
             } else {
                 this.$el.html(this.template({model: this.model}));
                 this.$el.animate({
@@ -59,16 +66,18 @@ $(function () {
         tagName: 'ul',
         el: '#trucksUl',
         events: {
-            "click .truckLi": "highlighTruck"
+            "click .truckLi": "highlighTruck",
 //        'hover truckLi':'animateHover'
 //        "dblclick .view": "edit",
-//        "click a.destroy": "clear",
+            "click button.navbar-toggle": "toggleList",
+            "hover button.navbar-toggle": "toggleSomeOfList"
 //        "keypress .edit": "updateOnEnter",
 //        "blur .edit": "close"
         },
         initialize: function () {
             this.listenTo(this.collection, 'change sync', this.render);
             this.templateList = _.template(app.tpl.get('trucksList'));
+            this.listOpened = false;
         },
         render: function () {
             var self = this,
@@ -132,6 +141,15 @@ $(function () {
                     marker.setAnimation(null);
                 }, 5000);
             }
+        },
+        toggleList: function (ev) {
+            $(ev.currentTarget).toggleClass("active");
+            this.$el.toggleClass("opened");
+            this.listOpened = !this.listOpened;
+        },
+        toggleSomeOfList: function (ev) {
+            alert('futincur!');
+            this.$el.toggleClass("partialOpened");
         }
     });
     app.staticPointsView = Backbone.View.extend({

@@ -62,7 +62,7 @@ app.drawTruckRecentInfoChart = function (data, container, truckNo) {
     //get data for chart...
 //    console.warn(data);
     var
-            i = 0, data0 = [], data1 = [], data2 = [], data3 = [],data4 = [],
+            i = 0, data0 = [], data1 = [], data2 = [], data3 = [], data4 = [],
             // set the allowed units for data grouping
             dataLength = data.length, max = 0,
             lastTimestamp = data[dataLength - 1][0];
@@ -134,7 +134,7 @@ app.drawTruckRecentInfoChart = function (data, container, truckNo) {
         rangeSelector: {
             enabled: false
         },
-        colors: ['#FF0000', '#00FF00', '#0000FF', '#FFFFFF'],
+        colors: [ 'rgba(43, 144, 143, 1)', 'rgba(144, 238, 126, 1)', 'rgba(244, 91, 91, 1)', 'rgba(119, 152, 191, 1)', '#73D8D7'],
         yAxis: [{
                 title: {
                     text: 'Speed'
@@ -156,7 +156,7 @@ app.drawTruckRecentInfoChart = function (data, container, truckNo) {
                 top: '40%',
                 height: '20%',
                 offset: 0
-            }, 
+            },
             {
                 title: {
                     text: 'Volume'
