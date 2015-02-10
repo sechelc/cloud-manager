@@ -18,10 +18,10 @@ $(function () {
             if (this.chartOpened === 1) {
                 //first time
                 this.$el.html(this.template({model: this.model}));
+                this.$el.find('table').html(this.templateUL({model: this.model}));
                 this.$el.animate({
                     height: '15%'
                 }, 500);
-                this.$el.find('table').html(this.templateUL({model: this.model}));
             } else if (this.chartOpened) {
                 this.$el.find('table').html(this.templateUL({model: this.model}));
             } else {
@@ -41,6 +41,7 @@ $(function () {
             });
             app.destroyTruckRecentInfoChart(this.$el.find('#truckRecentInfoChart'));
             this.chartOpened = false;
+            this.chartOpened = 1;
             self.stopListening();
         },
         showChart: function (e) {
