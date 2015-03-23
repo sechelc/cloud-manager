@@ -107,13 +107,11 @@ app.drawTruckRecentInfoChart = function (data, container, truckNo) {
                                 if (dataLength > 0) {
                                     lastTimestamp = data[dataLength - 1][0];
                                     var i = 0;
-                                    for (i; i < dataLength; i += 1) {
+                                    for (i; i < dataLength; i++) {
                                         var x = data[i][0];
                                         $.each(self.series, function (j, series) {
-                                            if (data[i][j + 1]) {
-                                                var y = data[i][j + 1];
-                                                series.addPoint([x, y], true, true);
-                                            }
+                                            var y = data[i][j + 1];
+                                            series.addPoint([x, y], true, true);
                                         });
                                     }
                                 }
@@ -134,7 +132,7 @@ app.drawTruckRecentInfoChart = function (data, container, truckNo) {
         rangeSelector: {
             enabled: false
         },
-        colors: [ 'rgba(43, 144, 143, 1)', 'rgba(144, 238, 126, 1)', 'rgba(244, 91, 91, 1)', 'rgba(119, 152, 191, 1)', '#73D8D7'],
+        colors: ['rgba(43, 144, 143, 1)', 'rgba(144, 238, 126, 1)', 'rgba(244, 91, 91, 1)', 'rgba(119, 152, 191, 1)', '#73D8D7'],
         yAxis: [{
                 title: {
                     text: 'Speed'

@@ -1,24 +1,32 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title th:text="#{view.index.title}">Welcome!</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
-    <link href="../../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}" />
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="../../../resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
-</head>
-<body>
-<div th:replace="fragments/header :: header">&nbsp;</div>
-<div class="container">
-    <!-- /* Handle the flash message */-->
-    <th:block th:if="${message != null}">
-        <!-- /* The message code is returned from the @Controller */ -->
-        <div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=#{${message.message}(${#authentication.name})})">&nbsp;</div>
-    </th:block>
-    <p>
-        Welcome to the Spring MVC Quickstart application!
-    </p>
-</div>
-</body>
+    <head>
+        <title th:text="#{view.index.title}">Welcome!</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
+        <link href="../../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}" />
+        <script src="../../../resources/js/libs/jquery.js" th:src="@{/resources/js/libs/jquery.js}"></script>
+        <script src="../../../resources/js/libs/highstock.src.js" th:src="@{/resources/js/libs/highstock.src.js}"></script>
+        <script src="../../../resources/js/libs/bootstrap.min.js" th:src="@{/resources/js/libs/bootstrap.min.js}"></script>
+        <!--GOOGLE MAPS API-->
+        <script type="text/javascript"
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAsVqHtStTbSymM7tKdrdD54-YcehXvkBw">
+        </script>
+        <!--GOOGLE MAPS API-->
+        <!--APP-->
+        <script src="../../../resources/js/libs/underscore.js" th:src="@{/resources/js/libs/underscore.js}"></script>
+        <script src="../../../resources/js/libs/backbone.js" th:src="@{/resources/js/libs/backbone.js}"></script>
+        <script src="../../../resources/js/utils.js" th:src="@{/resources/js/utils.js}"></script>
+        <script src="../../../resources/js/models/mapPointsModel.js" th:src="@{/resources/js/models/mapPointsModel.js}"></script>
+        <script src="../../../resources/js/views/mapPointsView.js" th:src="@{/resources/js/views/mapPointsView.js}"></script>
+        <script src="../../../resources/js/baseApp.js" th:src="@{/resources/js/baseApp.js}"></script>
+        <!--APP-->
+    </head>
+    <body>
+        <div th:replace="fragments/header :: header">&nbsp;</div>
+        <div id="bigMap"></div>
+        <div id="truckInfo"></div>
+        <div id="trucksUl"></div>
+        <div th:replace="fragments/footer :: footer">&nbsp;</div>
+    </body>
 </html>

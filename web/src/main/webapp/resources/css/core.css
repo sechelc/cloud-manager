@@ -46,10 +46,10 @@ body.home form{
     list-style: none;
 }
 .truckInfoInner table tr td{
-    width: 17%;
+    width: 16%;
 }
 .truckInfoInner table tr td.summaryLable{
-    width: 5%;
+    width: 7%;
 }
 #truckRecentInfoChart{
     margin: 10px 0 0 0;
